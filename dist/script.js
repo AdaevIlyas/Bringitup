@@ -3151,7 +3151,7 @@ function (_Slider) {
       var _this2 = this;
 
       this.next.addEventListener('click', function () {
-        return _this2.nextSlider;
+        _this2.nextSlide();
       });
       this.prev.addEventListener('click', function () {
         // for (let i = this.slides.length - 1; i > 0; i--) {

@@ -46,7 +46,9 @@ export default class MiniSlider extends Slider {
   }
 
   bindTriggers() {
-    this.next.addEventListener('click', () => this.nextSlider);
+    this.next.addEventListener('click', () => {
+      this.nextSlide();
+    });
 
     this.prev.addEventListener('click', () => {
       // for (let i = this.slides.length - 1; i > 0; i--) {
