@@ -48,11 +48,13 @@ export default class MainSlider extends Slider {
         this.plusSlides(1);
       });
 
-      item.parentNode.previousElementSibling.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.slideIndex = 1;
-        this.showSlides(this.slideIndex);
-      });
+      if (!item.parentNode.previousElementSibling.classList.contains('module__info-book')) {
+        item.parentNode.previousElementSibling.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.slideIndex = 1;
+          this.showSlides(this.slideIndex);
+        });
+      }
     });
 
     document.querySelectorAll('.prevmodule').forEach(item => {
