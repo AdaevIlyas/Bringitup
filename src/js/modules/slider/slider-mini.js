@@ -27,22 +27,13 @@ export default class MiniSlider extends Slider {
   }
 
   nextSlide() {
-    // if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
-    //   this.container.append(this.slides[0]); // slide
-    //   this.container.append(this.slides[1]); // btn 1
-    //   this.container.append(this.slides[2]); // btn 2
-    //   this.decorizeSlides();
-    // } else if (this.slides[1].tagName == "BUTTON") {
-    //   this.container.append(this.slides[0]); // slide
-    //   this.container.append(this.slides[1]); // btn 1
-    //   this.decorizeSlides();
-    // } else {
-    //   this.container.append(this.slides[0]);
-    //   this.decorizeSlides();
-    // }
-
     this.container.append(this.slides[0]);
     this.decorizeSlides();
+    this.slides.forEach(item => {
+      if (this.slides[0].tagName === 'BUTTON' || this.slides[1].tagName === 'BUTTON') {
+        this.container.append(this.slides[1]);
+      }
+    });
   }
 
   bindTriggers() {
@@ -51,17 +42,14 @@ export default class MiniSlider extends Slider {
     });
 
     this.prev.addEventListener('click', () => {
-      // for (let i = this.slides.length - 1; i > 0; i--) {
-      //   if (this.slides[i].tagName !== "BUTTON") {
-      //     let active = this.slides[i];
-      //     this.container.insertBefore(active, this.slides[0]);
-      //     this.decorizeSlides();
-      //     break;
-      //   }
-      // }
-      let active = this.slides[this.slides.length - 1];
-      this.container.insertBefore(active, this.slides[0]);
-      this.decorizeSlides();
+      for (let i = this.slides.length - 1; i > 0; i--) {
+        if (this.slides[i].tagName !== "BUTTON") {
+          let active = this.slides[i];
+          this.container.insertBefore(active, this.slides[0]);
+          this.decorizeSlides();
+          break;
+        }
+      }
     });
   }
 

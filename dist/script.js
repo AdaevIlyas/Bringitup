@@ -5693,50 +5693,42 @@ function (_Slider) {
   }, {
     key: "nextSlide",
     value: function nextSlide() {
-      // if (this.slides[1].tagName == "BUTTON" && this.slides[2].tagName == "BUTTON") {
-      //   this.container.append(this.slides[0]); // slide
-      //   this.container.append(this.slides[1]); // btn 1
-      //   this.container.append(this.slides[2]); // btn 2
-      //   this.decorizeSlides();
-      // } else if (this.slides[1].tagName == "BUTTON") {
-      //   this.container.append(this.slides[0]); // slide
-      //   this.container.append(this.slides[1]); // btn 1
-      //   this.decorizeSlides();
-      // } else {
-      //   this.container.append(this.slides[0]);
-      //   this.decorizeSlides();
-      // }
+      var _this2 = this;
+
       this.container.append(this.slides[0]);
       this.decorizeSlides();
+      this.slides.forEach(function (item) {
+        if (_this2.slides[0].tagName === 'BUTTON' || _this2.slides[1].tagName === 'BUTTON') {
+          _this2.container.append(_this2.slides[1]);
+        }
+      });
     }
   }, {
     key: "bindTriggers",
     value: function bindTriggers() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.next.addEventListener('click', function () {
-        _this2.nextSlide();
+        _this3.nextSlide();
       });
       this.prev.addEventListener('click', function () {
-        // for (let i = this.slides.length - 1; i > 0; i--) {
-        //   if (this.slides[i].tagName !== "BUTTON") {
-        //     let active = this.slides[i];
-        //     this.container.insertBefore(active, this.slides[0]);
-        //     this.decorizeSlides();
-        //     break;
-        //   }
-        // }
-        var active = _this2.slides[_this2.slides.length - 1];
+        for (var i = _this3.slides.length - 1; i > 0; i--) {
+          if (_this3.slides[i].tagName !== "BUTTON") {
+            var active = _this3.slides[i];
 
-        _this2.container.insertBefore(active, _this2.slides[0]);
+            _this3.container.insertBefore(active, _this3.slides[0]);
 
-        _this2.decorizeSlides();
+            _this3.decorizeSlides();
+
+            break;
+          }
+        }
       });
     }
   }, {
     key: "init",
     value: function init() {
-      var _this3 = this;
+      var _this4 = this;
 
       try {
         this.container.style.cssText = "\n      display: flex;\n      flex-wrap: wrap;\n      overflow: hidden;\n      align-items: flex-start;\n    ";
@@ -5745,7 +5737,7 @@ function (_Slider) {
 
         if (this.autoplay) {
           setInterval(function () {
-            return _this3.nextSlide();
+            return _this4.nextSlide();
           }, 5000);
         }
       } catch (e) {}
